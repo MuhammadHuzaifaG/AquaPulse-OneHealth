@@ -1,4 +1,4 @@
-# AquaPulse-OneHealth
+# AquaPulse-OneHealth | Urban Freshwater 
 
 > Urban Freshwater Telemetry & Vector Surveillance Platform
 
