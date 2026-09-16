@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  aquapulse-backend:
+    build: .
+    container_name: aquapulse_api_prod
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      # Map the SQLite database to a persistent Docker volume 
+      # so data is not lost between container restarts
+      - aquapulse_data:/app/data
+    env_file:
+      - .env
+    environment:
+      - DEBUG=True
+      - DATABASE_URL=sqlite+aiosqlite:///./data/aquapulse.db
+    restart: unless-stopped
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+volumes:
+  aquapulse_data:
+    name: aquapulse_persistent_data
