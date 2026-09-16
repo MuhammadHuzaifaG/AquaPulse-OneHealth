@@ -4,8 +4,6 @@
 
 ---
 
-## Challenge & Track Alignment
-
 ### Track 
 
 * **Track 1: AI-Supported Assessment of Urban Aquatic Ecosystems**
@@ -15,13 +13,13 @@ The platform processes ecological indicators to quantify vector-borne disease ri
 
 ---
 
-## Project Description
+<img width="1313" height="618" alt="main" src="https://github.com/user-attachments/assets/20c7db35-c06f-4e5f-a915-37d8f59c9aaa" />
 
-### Problem
+## Problem
 
 Urban aquatic ecosystems suffer from fragmented data collection, non-point source pollution, and rapid vector-borne disease proliferation. Traditional laboratory sampling is costly, periodic, and slow to inform public health officials. Consequently, local governments lack actionable telemetry, while citizen scientists remain disconnected from municipal decision-making processes.
 
-### Solution
+## Solution
 
 AquaPulse OneHealth provides an end-to-end telemetry ingestion and diagnostic engine. It converts physical observations, bio-indicator counts (such as macroinvertebrates and mosquito larvae), chemical readings, and field photos into standardized health metrics.
 
@@ -60,6 +58,8 @@ Using a combined analytical approach—deterministic scoring models paired with 
 
 ---
 
+<img width="1257" height="640" alt="result" src="https://github.com/user-attachments/assets/0ec98ac9-0ff9-4297-a21c-61b429e75fbf" />
+
 ## Prerequisites
 
 Ensure the following tools are installed on your environment before setup:
@@ -70,6 +70,8 @@ Ensure the following tools are installed on your environment before setup:
 * **Hugging Face API Key**
 
 ---
+
+<img width="1306" height="402" alt="leader" src="https://github.com/user-attachments/assets/92110b54-ba9a-42de-9dde-7b6adce52d0f" />
 
 ## Local Setup Instructions
 
