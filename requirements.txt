@@ -3,7 +3,7 @@ uvicorn==0.28.0
 pydantic==2.6.4
 pydantic-settings==2.2.1
 sqlalchemy==2.0.29
-aiosqlite==0.20.0
+aiosqlite
 alembic==1.13.1
 google-genai
 huggingface-hub==0.21.4

@@ -3,91 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AquaPulse OneHealth</title>
+    <title>AquaPulse OneHealth Intelligence Platform</title>
     <link rel="stylesheet" href="css/styles.css">
+    <!-- Leaflet CSS for Map Integration (Scale & Architecture) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
     <header class="app-header">
-        <div class="header-content">
+        <div class="header-brand">
             <h1>💧 AquaPulse OneHealth</h1>
-            <p>From streams to systems: actioning citizen science</p>
+            <p>Urban Freshwater Intelligence & Disease Vector Surveillance</p>
         </div>
-        <div class="user-profile">
+        <div class="header-nav-pills">
+            <button class="nav-pill active" onclick="switchTab('submit-tab', this)">Field Assessment</button>
+            <button class="nav-pill" onclick="switchTab('map-tab', this)">Watershed Map</button>
+            <button class="nav-pill" onclick="switchTab('leaderboard-tab', this)">Steward Community</button>
+        </div>
+        <div class="user-badge-container">
             <span id="user-badge" class="badge">Novice Observer</span>
-            <span id="user-points">0 pts</span>
+            <span id="user-points" class="points-pill">0 pts</span>
         </div>
     </header>
 
     <main class="container">
-        <!-- Track 1: Citizen Science UX Workflow -->
-        <section class="card assessment-section">
-            <h2>New Stream Assessment</h2>
-            <form id="assessment-form">
-                <div class="input-group">
-                    <label>Citizen Username</label>
-                    <input type="text" id="username" required placeholder="e.g., EcoWarrior99">
+        <!-- TAB 1: Field Assessment Workflow (UX & Impact) -->
+        <section id="submit-tab" class="tab-content">
+            <div class="card form-card">
+                <div class="card-header-flex">
+                    <h2>🌍 Citizen Stream Telemetry Capture</h2>
+                    <span class="info-badge">Track 1 & 2 Active</span>
                 </div>
-                <div class="input-group">
-                    <label>Stream Name</label>
-                    <input type="text" id="stream_name" required placeholder="e.g., Mondego River Tributary">
+                <form id="assessment-form">
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label>Citizen Username</label>
+                            <input type="text" id="username" required value="EcoSteward_Alpha" placeholder="Your handle">
+                        </div>
+                        <div class="input-group">
+                            <label>Stream / Canal Segment Name</label>
+                            <input type="text" id="stream_name" required value="Mondego Tributary Sector 3" placeholder="Location name">
+                        </div>
+                    </div>
+
+                    <div class="sliders-container">
+                        <div class="slider-group">
+                            <label>Water Clarity (1=Muddy, 5=Clear): <span id="clarity-val" class="val-pill">4</span></label>
+                            <input type="range" id="water_clarity" min="1" max="5" value="4">
+                        </div>
+                        <div class="slider-group">
+                            <label>Water Flow (1=Stagnant, 5=Rapid): <span id="flow-val" class="val-pill">3</span></label>
+                            <input type="range" id="water_flow" min="1" max="5" value="3">
+                        </div>
+                        <div class="slider-group">
+                            <label>Garbage Presence (1=Severe, 5=Clean): <span id="garbage-val" class="val-pill">4</span></label>
+                            <input type="range" id="garbage_presence" min="1" max="5" value="4">
+                        </div>
+                        <div class="slider-group">
+                            <label>Riparian Vegetation (1=Bare, 5=Dense): <span id="veg-val" class="val-pill">4</span></label>
+                            <input type="range" id="vegetation_cover" min="1" max="5" value="4">
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label>Odor Profile</label>
+                            <select id="odor_type">
+                                <option value="Natural">Natural / Fresh</option>
+                                <option value="Musty">Musty / Earthy</option>
+                                <option value="Sewage">Sewage / Organic Decay</option>
+                                <option value="Chemical">Chemical / Industrial</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>pH Level (0-14)</label>
+                            <input type="number" id="ph_level" step="0.1" value="7.2">
+                        </div>
+                        <div class="input-group">
+                            <label>Dissolved Oxygen (mg/L)</label>
+                            <input type="number" id="dissolved_oxygen" step="0.1" value="7.5">
+                        </div>
+                        <div class="input-group">
+                            <label>Mosquito Larvae Count</label>
+                            <input type="number" id="mosquito_larvae" value="0">
+                        </div>
+                    </div>
+
+                    <div class="form-grid-checkbox">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="discharge_pipe"> Stormwater or Industrial Outflow Pipe Nearby
+                        </label>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Field Photo (Enables Multimodal Gemini Vision AI Verification)</label>
+                        <input type="file" id="image-upload" accept="image/*" class="file-input">
+                    </div>
+
+                    <button type="submit" id="submit-btn" class="btn-primary">⚡ Run Expert One Health AI Analysis</button>
+                </form>
+
+                <div id="loading" class="loading-box hidden">
+                    <div class="spinner"></div>
+                    <p>Executing environmental algorithms, vector risk models, and Gemini Expert diagnostics...</p>
                 </div>
+            </div>
+
+            <!-- Results Intelligence Dashboard Section -->
+            <section id="results-section" class="card results-card hidden">
+                <h2>🔬 One Health Intelligence & Diagnostics</h2>
                 
-                <!-- Simplified Visual UX (Track 1) -->
-                <div class="slider-group">
-                    <label>Water Clarity: <span id="clarity-val">3</span></label>
-                    <input type="range" id="water_clarity" min="1" max="5" value="3">
-                    <small>1 = Murky/Brown, 5 = Crystal Clear</small>
+                <div id="health-warning-banner" class="warning-banner hidden">
+                    ⚠️ <strong id="warning-text">Public Health Alert</strong>
                 </div>
 
-                <div class="slider-group">
-                    <label>Vegetation Cover: <span id="veg-val">3</span></label>
-                    <input type="range" id="vegetation_cover" min="1" max="5" value="3">
-                    <small>1 = Concrete/Bare, 5 = Dense Trees/Plants</small>
-                </div>
-                
-                <div class="input-group">
-                    <label>Upload Photo (Optional, enables AI Analysis)</label>
-                    <input type="file" id="image-upload" accept="image/*">
+                <div class="metrics-grid">
+                    <div class="metric-box">
+                        <span>Water Quality Index</span>
+                        <h3 id="res-wqi">--</h3>
+                    </div>
+                    <div class="metric-box">
+                        <span>Ecological Integrity</span>
+                        <h3 id="res-eii">--</h3>
+                    </div>
+                    <div class="metric-box risk">
+                        <span>Vector Disease Risk</span>
+                        <h3 id="res-risk">--</h3>
+                    </div>
+                    <div class="metric-box">
+                        <span>Human Wellbeing Impact</span>
+                        <h3 id="res-wellbeing">--</h3>
+                    </div>
                 </div>
 
-                <button type="submit" id="submit-btn" class="btn">Submit Assessment</button>
-            </form>
-            <div id="loading" class="hidden">Analyzing data and generating insights...</div>
+                <div class="insight-block">
+                    <h4>Expert Scientific Diagnostic</h4>
+                    <p id="res-diagnostic">...</p>
+                </div>
+
+                <div class="action-plans-grid">
+                    <div class="action-column municipal">
+                        <h4>🏛️ Municipal Policy & Engineering Plan</h4>
+                        <ul id="res-municipal-actions"></ul>
+                    </div>
+                    <div class="action-column citizen">
+                        <h4>🌱 Community & Citizen Action Plan</h4>
+                        <ul id="res-citizen-actions"></ul>
+                    </div>
+                </div>
+            </section>
         </section>
 
-        <!-- Track 2 & 4: Insights and Storytelling -->
-        <section id="results-section" class="card hidden">
-            <h2>AI Analysis & Insights</h2>
-            <div class="results-grid">
-                <div class="stat-box">
-                    <h3>Water Quality</h3>
-                    <div id="res-wqi" class="score-large">--</div>
-                </div>
-                <div class="stat-box warning">
-                    <h3>Disease Vector Risk</h3>
-                    <div id="res-risk" class="score-large">--</div>
-                </div>
-            </div>
-            
-            <div class="story-box">
-                <h4>Community Update</h4>
-                <p id="res-story">...</p>
-            </div>
-            
-            <div class="action-box">
-                <h4>Recommended Actions</h4>
-                <ul id="res-actions"></ul>
+        <!-- TAB 2: Watershed Map GIS View (Scale & Architecture) -->
+        <section id="map-tab" class="tab-content hidden">
+            <div class="card">
+                <h2>🗺️ Live Watershed Telemetry GIS Map</h2>
+                <p class="section-desc">Real-time geospatial tracking of municipal water bodies, active citizen sensors, and vector risk hotspots.</p>
+                <div id="map" class="map-container"></div>
             </div>
         </section>
 
-        <!-- Track 5: Gamification Leaderboard -->
-        <section class="card">
-            <h2>Top Community Stewards</h2>
-            <ul id="leaderboard" class="leaderboard-list">
-                <!-- Populated via JS -->
-            </ul>
+        <!-- TAB 3: Community Leaderboard (Gamification & Engagement) -->
+        <section id="leaderboard-tab" class="tab-content hidden">
+            <div class="card">
+                <h2>🏆 Active Community Stewards Leaderboard</h2>
+                <p class="section-desc">Recognizing citizen scientists driving urban freshwater protection and data transparency.</p>
+                <ul id="leaderboard" class="leaderboard-list"></ul>
+            </div>
         </section>
     </main>
+
+    <!-- Leaflet JS for Interactive Map -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>

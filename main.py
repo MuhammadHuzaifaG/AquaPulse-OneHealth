@@ -5,7 +5,8 @@ from fastapi.responses import FileResponse
 from contextlib import asynccontextmanager
 import uvicorn
 import os
-
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning, module="pydantic")
 from config import settings
 from routes.api_v1 import router as api_router
 from routes.fhir_router import router as fhir_router
