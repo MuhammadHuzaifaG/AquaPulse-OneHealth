@@ -39,6 +39,28 @@ Using a combined analytical approach—deterministic scoring models paired with 
 
 ---
 
+## Alignment with Evaluation Criteria
+
+### 1. How Your Solution Aligns with OneAquaHealth
+AquaPulse-OneHealth directly operationalizes the **OneAquaHealth** framework by linking urban aquatic ecosystem health with human public health and environmental resilience:
+* **Holistic Interconnection:** It connects physical/chemical water quality (turbidity, pH) and ecological bio-indicators (macroinvertebrate populations) to vector disease risks (mosquito breeding) and human well-being metrics.
+* **Dual-Tiered Actionability:** Translates complex ecological telemetry into immediate, complementary operational plans—policy-level interventions for municipal authorities and community-level mitigation steps for citizens.
+* **Standards-Based Interoperability:** Implements HL7 FHIR-aligned data schemas to ensure ecological and vector telemetry can directly feed into broader healthcare and municipal health systems.
+
+### 2. Innovation and Practical Value
+* **Hybrid Diagnostic Engine:** Blends deterministic environmental scoring (WQI, EII, Vector Risk) with generative multimodal AI to deliver fast, reproducible, and context-aware risk evaluations.
+* **Closing the Citizen-to-Government Gap:** Replaces slow, weeks-long laboratory workflows with instant, photo-verified field assessments powered by citizen scientists.
+* **Gamified Community Engagement:** Features a built-in incentive system with points and leaderboards to maintain long-term user participation and high-density spatial data collection.
+* **Actionable Spatial Intelligence:** Interactive GIS mapping transforms raw data points into actionable hotspot visualizations for rapid emergency and municipal planning.
+
+### 3. Effective Use of Data, Technology, AI, APIs, & Standards
+* **Multimodal Visual AI (Google Gemini 2.5 Flash):** Analyzes user-submitted field photos in real time to verify self-reported turbidity, stream degradation, and discharge presence against field notes.
+* **Vector Risk Predictive ML (Hugging Face Service):** Utilizes specialized machine learning microservices to infer vector-borne disease transmission potential from bio-indicator counts.
+* **Robust Enterprise Stack (FastAPI & Pydantic v2):** Implements an asynchronous, highly scalable Python backend using Pydantic v2 for strict data validation and instant API responsiveness.
+* **Geospatial & Interoperability Standards:** Leverages **Leaflet.js** and **OpenStreetMap APIs** for frontend GIS rendering, alongside **HL7 FHIR R4 schemas** for standardizing environmental health records.
+
+---
+
 ## Key Results & Capabilities
 
 * **Deterministic Index Computation:** Calculates Water Quality Index (WQI), Ecological Integrity Index (EII), Vector Disease Risk Score, and Human Wellbeing Impact.
